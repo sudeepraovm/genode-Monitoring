@@ -1,4 +1,4 @@
-#include "monitoring_session_component.h"
+#include "mon_manager/mon_manager.h"
 #include <timer_session/connection.h>
 #include <base/env.h>
 #include <base/printf.h>
@@ -9,18 +9,11 @@
 #include <util/string.h>
 #include <trace_session/connection.h>
 #include <os/config.h>
+namespace Mon_manager{
+	
+	Mon_manager::Mon_manager() {}
 
-Monitoring_session_component::Monitoring_session_component(Server::Entrypoint& ep) :
-	_ep{ep},
-	_cap{}
-{
-}
-
-Monitoring_session_component::~Monitoring_session_component()
-{
-}
-
-void Monitoring_session_component::update_info()
+void Mon_manager::update_info(Genode::Dataspace_capability ds_cap)
 {
 	static Timer::Connection timer;
 	static Genode::Trace::Connection trace(1024*4096, 64*4096, 0);
@@ -52,4 +45,5 @@ void Monitoring_session_component::update_info()
 	core0_is_online=scheduler_info.core0_is_online();
 	core1_is_online=scheduler_info.core1_is_online();
 	num_cores=scheduler_info.num_cores();
+}
 }
