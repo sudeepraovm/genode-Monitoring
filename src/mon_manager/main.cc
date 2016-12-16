@@ -28,6 +28,11 @@ namespace Mon_manager
 				_monmanager->update_info(ds_cap);
 			}
 
+			Genode::Dataspace_capability init_ds_cap(int num_threads)
+			{
+				return _monmanager->init_ds_cap(num_threads);
+			}
+
 			Session_component(Mon_manager *monmanager)
 			: Genode::Rpc_object<Session>()
 			{

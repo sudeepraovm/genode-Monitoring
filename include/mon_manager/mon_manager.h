@@ -28,6 +28,7 @@ class Mon_manager
 	public:
 		void update_info(Genode::Dataspace_capability ds_cap);
 		Mon_manager();
+		Genode::Dataspace_capability init_ds_cap(int num_threads);
 		
 	protected:
 		bool core0_is_online;
@@ -37,6 +38,5 @@ class Mon_manager
 		Genode::Trace::Execution_time idle1;
 		size_t ram_avail;
 		int num_threads;
-		Monitoring_object threads[];
 };
 }

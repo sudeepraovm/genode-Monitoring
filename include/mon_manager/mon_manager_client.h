@@ -15,5 +15,10 @@ struct Session_client : Genode::Rpc_client<Session>
 		call<Rpc_update_info>(ds_cap);
 	}
 
+	Genode::Dataspace_capability init_ds_cap(int num_threads)
+	{
+		return call<Rpc_init_ds_cap>(num_threads);
+	}
+
 };
 }
