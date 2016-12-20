@@ -33,6 +33,21 @@ namespace Mon_manager
 				return _monmanager->init_ds_cap(num_threads);
 			}
 
+			int get_num_cores()
+			{
+				return _monmanager->get_num_cores();
+			}
+
+			Genode::Trace::Execution_time get_idle_time(int core)
+			{
+				return _monmanager->get_idle_time(core);
+			}
+
+			bool is_core_online(int core)
+			{
+				return _monmanager->is_core_online(core);
+			}
+
 			Session_component(Mon_manager *monmanager)
 			: Genode::Rpc_object<Session>()
 			{
