@@ -25,16 +25,16 @@ namespace Mon_manager{
 		for (size_t i = 0; i < num_subjects; i++) {
 			Genode::Trace::CPU_info cpu_info = trace.cpu_info(subjects[i]);
 			Genode::Trace::RAM_info ram_info = trace.ram_info(subjects[i]);
-			Genode::Trace::SCHEDULER_info scheduler_info = trace.scheduler_info(subjects[i]);
-			if(Genode::strcmp(cpu_info.session_label().string(), "init")!=0) {
-       				threads[i].session_label=cpu_info.session_label();
-				threads[i].thread_name=cpu_info.thread_name();
+			if(Genode::strcmp(ram_info.session_label().string(), "init")!=0) {
+       				threads[i].session_label=ram_info.session_label();
+				threads[i].thread_name=ram_info.thread_name();
 				threads[i].prio=cpu_info.prio();
 				threads[i].execution_time=cpu_info.execution_time();
 				threads[i].id=cpu_info.id();
-				threads[i].foc_id=scheduler_info.foc_id();
+				threads[i].foc_id=cpu_info.foc_id();
 				threads[i].ram_used=ram_info.ram_used();
 				threads[i].ram_quota=ram_info.ram_quota();
+				threads[i].pos_rq=cpu_info.pos_rq();
 			}else {
 				init=ram_info;
 			}

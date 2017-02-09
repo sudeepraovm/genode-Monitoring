@@ -18,7 +18,8 @@ struct Monitoring_object
 	Genode::Trace::Execution_time     execution_time;
 	unsigned	   prio;
 	unsigned	   id;
-	long unsigned int  foc_id;
+	unsigned  	   foc_id;
+	int		   pos_rq;
 	size_t		   ram_quota;
 	size_t		   ram_used;
 };
