@@ -15,7 +15,7 @@ namespace Mon_manager {
 
 		virtual void update_info(Genode::Dataspace_capability ds_cap) = 0;
 
-		virtual Genode::Dataspace_capability init_ds_cap(int num_threads) = 0;
+		virtual void update_rqs(Genode::Dataspace_capability ds_cap) = 0;
 
 		virtual int get_num_cores() = 0;
 
@@ -25,7 +25,7 @@ namespace Mon_manager {
 
 		GENODE_RPC(Rpc_update_info, void, update_info, Genode::Dataspace_capability);
 
-		GENODE_RPC(Rpc_init_ds_cap, Genode::Dataspace_capability, init_ds_cap, int);
+		GENODE_RPC(Rpc_update_rqs, void, update_rqs, Genode::Dataspace_capability);
 
 		GENODE_RPC(Rpc_get_num_cores, int, get_num_cores);
 
@@ -33,7 +33,7 @@ namespace Mon_manager {
 
 	 	GENODE_RPC(Rpc_is_core_online, bool, is_core_online, int);
 
-		GENODE_RPC_INTERFACE(Rpc_update_info, Rpc_init_ds_cap, Rpc_get_num_cores, Rpc_get_idle_time, Rpc_is_core_online);
+		GENODE_RPC_INTERFACE(Rpc_update_info, Rpc_get_num_cores, Rpc_get_idle_time, Rpc_is_core_online, Rpc_update_rqs);
 
 	};
 

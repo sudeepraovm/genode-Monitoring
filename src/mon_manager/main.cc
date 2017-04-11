@@ -28,9 +28,9 @@ namespace Mon_manager
 				_monmanager->update_info(ds_cap);
 			}
 
-			Genode::Dataspace_capability init_ds_cap(int num_threads)
+			void update_rqs(Genode::Dataspace_capability ds_cap)
 			{
-				return _monmanager->init_ds_cap(num_threads);
+				_monmanager->update_rqs(ds_cap);
 			}
 
 			int get_num_cores()
