@@ -9,19 +9,25 @@
 #include <util/string.h>
 #include <cap_session/connection.h>
 #include <trace_session/connection.h>
+#include <base/thread_state.h>
+#include <base/native_types.h>
 namespace Mon_manager{
 struct Monitoring_object
 {
-	Genode::Trace::Session_label      session_label;
-	Genode::Trace::Thread_name        thread_name;
-	Genode::Trace::Policy_id          policy_id;
-	Genode::Trace::Execution_time     execution_time;
-	unsigned	   prio;
-	unsigned	   id;
-	unsigned  	   foc_id;
-	int		   pos_rq;
-	size_t		   ram_quota;
-	size_t		   ram_used;
+	Genode::Trace::Session_label		session_label;
+	Genode::Trace::Thread_name		thread_name;
+	Genode::Trace::Policy_id		policy_id;
+	Genode::Trace::Execution_time		execution_time;
+	unsigned	   			prio;
+	unsigned	   			id;
+	unsigned  	   			foc_id;
+	int		   			pos_rq;
+	size_t		   			ram_quota;
+	size_t		   			ram_used;
+	Genode::Trace::CPU_info::State 		state;
+	Genode::Affinity::Location		affinity;
+	unsigned long long			start_time;
+	unsigned long long			arrival_time;
 };
 
 class Mon_manager
