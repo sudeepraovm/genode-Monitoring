@@ -35,6 +35,11 @@ namespace Mon_manager{
 				threads[i].foc_id=cpu_info.foc_id();
 				threads[i].ram_used=ram_info.ram_used();
 				threads[i].ram_quota=ram_info.ram_quota();
+				threads[i].arrival_time=cpu_info.arrival_time();
+				threads[i].start_time=cpu_info.start_time();
+				threads[i].policy_id=cpu_info.policy_id();
+				threads[i].state=cpu_info.state();
+				threads[i].affinity=cpu_info.affinity();
 			}else {
 				init=ram_info;
 			}
@@ -95,16 +100,6 @@ namespace Mon_manager{
 			case 1:return core1_is_online;
 			case 2:return core2_is_online;
 			case 3:return core3_is_online;
-			default:return -1;
-		}
-	}
-
-	double Mon_manager::utilization(int core) {
-		switch(core) {
-			case 0:return util0;
-			case 1:return util1;
-			case 2:return util2;
-			case 3:return util3;
 			default:return -1;
 		}
 	}

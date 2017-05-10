@@ -2,6 +2,8 @@
 
 #include <base/signal.h>
 #include <mon_manager/mon_manager_session.h>
+#include <utilization/connection.h>
+#include <utilization/utilization.h>
 #include <os/attached_ram_dataspace.h>
 #include <os/server.h>
 #include <root/component.h>
@@ -21,7 +23,6 @@ struct Monitoring_object
 	unsigned	   			prio;
 	unsigned	   			id;
 	unsigned  	   			foc_id;
-	int		   			pos_rq;
 	size_t		   			ram_quota;
 	size_t		   			ram_used;
 	Genode::Trace::CPU_info::State 		state;
@@ -39,10 +40,10 @@ class Mon_manager
 		Genode::Dataspace_capability init_ds_cap(int num_threads);
 		int get_num_cores();
 		Genode::Trace::Execution_time get_idle_time(int core);
-		bool is_core_online(int core);
-		double utilization(int core); 
+		bool is_core_online(int core); 
 		
 	protected:
+		Utilization::Connection util;
 		int num_subjects;
 		int* rq;
 		Genode::Dataspace_capability rq_ds_cap;
