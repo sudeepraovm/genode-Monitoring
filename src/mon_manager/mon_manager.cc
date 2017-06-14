@@ -56,6 +56,14 @@ namespace Mon_manager{
 
 	}
 
+	void Mon_manager::update_dead(Genode::Dataspace_capability dead_ds_cap)
+	{
+		dead=Genode::env()->rm_session()->attach(dead_ds_cap);
+		Genode::env()->cpu_session()->dead(dead_ds_cap);
+
+	}
+
+
 	int Mon_manager::get_num_cores() {
 		num_threads=1;
 		static Genode::Trace::Connection trace(1024*4096, 64*4096, 0);

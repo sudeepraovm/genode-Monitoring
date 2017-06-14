@@ -33,6 +33,11 @@ namespace Mon_manager
 				_monmanager->update_rqs(ds_cap);
 			}
 
+			void update_dead(Genode::Dataspace_capability ds_cap)
+			{
+				_monmanager->update_dead(ds_cap);
+			}
+
 			int get_num_cores()
 			{
 				return _monmanager->get_num_cores();
@@ -98,7 +103,7 @@ int main()
 	static Rpc_entrypoint ep(&cap, STACK_SIZE, "mon_manager_ep");
 
 	static Mon_manager::Root_component mon_manager_root(&ep, &sliced_heap, &monmanager);
-	env()->parent()->announce(ep.manage(&mon_manager_root));
+	env()->parent()->announce(ep.manage(&mon_manager_root)); 
 
 	sleep_forever();
 

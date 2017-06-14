@@ -36,6 +36,7 @@ class Mon_manager
 	public:
 		void update_info(Genode::Dataspace_capability ds_cap);
 		void update_rqs(Genode::Dataspace_capability rq_ds_cap);
+		void update_dead(Genode::Dataspace_capability dead_ds_cap);
 		Mon_manager();
 		Genode::Dataspace_capability init_ds_cap(int num_threads);
 		int get_num_cores();
@@ -46,6 +47,7 @@ class Mon_manager
 		Utilization::Connection util;
 		int num_subjects;
 		int* rq;
+		long long unsigned* dead;
 		Genode::Dataspace_capability rq_ds_cap;
 		bool core0_is_online;
 		bool core1_is_online;

@@ -17,6 +17,8 @@ namespace Mon_manager {
 
 		virtual void update_rqs(Genode::Dataspace_capability ds_cap) = 0;
 
+		virtual void update_dead(Genode::Dataspace_capability ds_cap) = 0;
+
 		virtual int get_num_cores() = 0;
 
 		virtual Genode::Trace::Execution_time get_idle_time(int core) = 0;
@@ -27,13 +29,15 @@ namespace Mon_manager {
 
 		GENODE_RPC(Rpc_update_rqs, void, update_rqs, Genode::Dataspace_capability);
 
+		GENODE_RPC(Rpc_update_dead, void, update_dead, Genode::Dataspace_capability);
+
 		GENODE_RPC(Rpc_get_num_cores, int, get_num_cores);
 
 		GENODE_RPC(Rpc_get_idle_time, Genode::Trace::Execution_time, get_idle_time, int);
 
 	 	GENODE_RPC(Rpc_is_core_online, bool, is_core_online, int);
 
-		GENODE_RPC_INTERFACE(Rpc_update_info, Rpc_get_num_cores, Rpc_get_idle_time, Rpc_is_core_online, Rpc_update_rqs);
+		GENODE_RPC_INTERFACE(Rpc_update_info, Rpc_get_num_cores, Rpc_get_idle_time, Rpc_is_core_online, Rpc_update_rqs, Rpc_update_dead);
 
 	};
 

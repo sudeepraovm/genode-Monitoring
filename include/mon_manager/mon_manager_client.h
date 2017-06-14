@@ -20,6 +20,11 @@ struct Session_client : Genode::Rpc_client<Session>
 		call<Rpc_update_rqs>(ds_cap);
 	}
 
+	void update_dead(Genode::Dataspace_capability ds_cap)
+	{
+		call<Rpc_update_dead>(ds_cap);
+	}
+
 	int get_num_cores()
 	{
 		return call<Rpc_get_num_cores>();
