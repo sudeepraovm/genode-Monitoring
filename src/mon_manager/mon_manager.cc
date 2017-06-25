@@ -47,12 +47,14 @@ namespace Mon_manager{
 		}
 		Genode::Trace::SCHEDULER_info scheduler_info = trace.scheduler_info(subjects[0]);
 		ram_avail=init.ram_quota();
+		Genode::env()->rm_session()->detach(threads);
 	}
 
 	void Mon_manager::update_rqs(Genode::Dataspace_capability rq_ds_cap)
 	{
 		rq=Genode::env()->rm_session()->attach(rq_ds_cap);
 		Genode::env()->cpu_session()->rq(rq_ds_cap);
+		Genode::env()->rm_session()->detach(rq);
 
 	}
 
@@ -60,7 +62,7 @@ namespace Mon_manager{
 	{
 		dead=Genode::env()->rm_session()->attach(dead_ds_cap);
 		Genode::env()->cpu_session()->dead(dead_ds_cap);
-
+		Genode::env()->rm_session()->detach(dead);
 	}
 
 
