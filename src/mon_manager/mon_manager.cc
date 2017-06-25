@@ -113,4 +113,9 @@ namespace Mon_manager{
 			default:return -1;
 		}
 	}
+
+	int Mon_manager::get_util(int core)
+	{
+		return util.utilization(core);
+	}
 }

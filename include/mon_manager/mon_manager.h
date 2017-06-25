@@ -41,7 +41,8 @@ class Mon_manager
 		Genode::Dataspace_capability init_ds_cap(int num_threads);
 		int get_num_cores();
 		Genode::Trace::Execution_time get_idle_time(int core);
-		bool is_core_online(int core); 
+		bool is_core_online(int core);
+		int get_util(int core);
 		
 	protected:
 		Utilization::Connection util;

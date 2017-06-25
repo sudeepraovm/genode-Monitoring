@@ -53,6 +53,11 @@ namespace Mon_manager
 				return _monmanager->is_core_online(core);
 			}
 
+			int get_util(int core)
+			{
+				return _monmanager->get_util(core);
+			}
+
 			Session_component(Mon_manager *monmanager)
 			: Genode::Rpc_object<Session>()
 			{

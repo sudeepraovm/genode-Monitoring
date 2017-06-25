@@ -25,6 +25,8 @@ namespace Mon_manager {
 
 		virtual bool is_core_online(int core) = 0;
 
+		virtual int get_util(int core) = 0;
+
 		GENODE_RPC(Rpc_update_info, void, update_info, Genode::Dataspace_capability);
 
 		GENODE_RPC(Rpc_update_rqs, void, update_rqs, Genode::Dataspace_capability);
@@ -37,7 +39,9 @@ namespace Mon_manager {
 
 	 	GENODE_RPC(Rpc_is_core_online, bool, is_core_online, int);
 
-		GENODE_RPC_INTERFACE(Rpc_update_info, Rpc_get_num_cores, Rpc_get_idle_time, Rpc_is_core_online, Rpc_update_rqs, Rpc_update_dead);
+		GENODE_RPC(Rpc_get_util, int, get_util, int);
+
+		GENODE_RPC_INTERFACE(Rpc_update_info, Rpc_get_num_cores, Rpc_get_idle_time, Rpc_is_core_online, Rpc_update_rqs, Rpc_update_dead, Rpc_get_util);
 
 	};
 

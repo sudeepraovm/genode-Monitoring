@@ -40,5 +40,10 @@ struct Session_client : Genode::Rpc_client<Session>
 		return call<Rpc_is_core_online>(core);
 	}
 
+	int get_util(int core)
+	{
+		return call<Rpc_get_util>(core);
+	}
+
 };
 }
