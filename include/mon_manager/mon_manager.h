@@ -1,5 +1,6 @@
 #pragma once
 
+#include <base/heap.h>
 #include <base/signal.h>
 #include <mon_manager/mon_manager_session.h>
 #include <utilization/connection.h>
@@ -12,11 +13,11 @@
 #include <cap_session/connection.h>
 #include <trace_session/connection.h>
 #include <base/thread_state.h>
-#include <base/native_types.h>
+
 namespace Mon_manager{
 struct Monitoring_object
 {
-	Genode::Trace::Session_label		session_label;
+	Genode::Session_label			session_label;
 	Genode::Trace::Thread_name		thread_name;
 	Genode::Trace::Policy_id		policy_id;
 	Genode::Trace::Execution_time		execution_time;
