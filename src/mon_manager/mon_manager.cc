@@ -37,6 +37,7 @@ namespace Mon_manager{
 				threads[i].ram_quota=ram_info.ram_quota();
 				threads[i].arrival_time=cpu_info.arrival_time();
 				threads[i].start_time=cpu_info.start_time();
+				threads[i].exit_time=cpu_info.kill_time();
 				threads[i].policy_id=cpu_info.policy_id();
 				threads[i].state=cpu_info.state();
 				threads[i].affinity=cpu_info.affinity();
