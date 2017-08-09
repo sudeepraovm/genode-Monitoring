@@ -30,6 +30,7 @@ struct Monitoring_object
 	Genode::Affinity::Location		affinity;
 	unsigned long long			start_time;
 	unsigned long long			arrival_time;
+	unsigned long long			exit_time;
 };
 
 class Mon_manager
