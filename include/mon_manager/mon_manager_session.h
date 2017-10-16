@@ -13,7 +13,7 @@ namespace Mon_manager {
 
 		static const char *service_name() { return "mon_manager"; }
 
-		virtual void update_info(Genode::Dataspace_capability ds_cap) = 0;
+		virtual size_t update_info(Genode::Dataspace_capability ds_cap) = 0;
 
 		virtual void update_rqs(Genode::Dataspace_capability ds_cap) = 0;
 
@@ -27,7 +27,7 @@ namespace Mon_manager {
 
 		virtual int get_util(int core) = 0;
 
-		GENODE_RPC(Rpc_update_info, void, update_info, Genode::Dataspace_capability);
+		GENODE_RPC(Rpc_update_info, size_t, update_info, Genode::Dataspace_capability);
 
 		GENODE_RPC(Rpc_update_rqs, void, update_rqs, Genode::Dataspace_capability);
 

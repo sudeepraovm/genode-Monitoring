@@ -36,7 +36,7 @@ struct Monitoring_object
 class Mon_manager
 {
 	public:
-		void update_info(Genode::Dataspace_capability ds_cap);
+		size_t update_info(Genode::Dataspace_capability ds_cap);
 		void update_rqs(Genode::Dataspace_capability rq_ds_cap);
 		void update_dead(Genode::Dataspace_capability dead_ds_cap);
 		Mon_manager();

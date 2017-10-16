@@ -13,7 +13,7 @@ namespace Mon_manager{
 
 	
 
-	void Mon_manager::update_info(Genode::Dataspace_capability mon_ds_cap)
+	size_t Mon_manager::update_info(Genode::Dataspace_capability mon_ds_cap)
 	{
 		num_threads=100;
 		Monitoring_object *threads = Genode::env()->rm_session()->attach(mon_ds_cap);
@@ -48,6 +48,7 @@ namespace Mon_manager{
 		Genode::Trace::SCHEDULER_info scheduler_info = trace.scheduler_info(subjects[0]);
 		ram_avail=init.ram_quota();
 		Genode::env()->rm_session()->detach(threads);
+		return num_subjects;
 	}
 
 	void Mon_manager::update_rqs(Genode::Dataspace_capability rq_ds_cap)

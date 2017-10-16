@@ -23,9 +23,9 @@ namespace Mon_manager
 
 		public:
 
-			void update_info(Genode::Dataspace_capability ds_cap)
+			size_t update_info(Genode::Dataspace_capability ds_cap)
 			{
-				_monmanager->update_info(ds_cap);
+				return _monmanager->update_info(ds_cap);
 			}
 
 			void update_rqs(Genode::Dataspace_capability ds_cap)
