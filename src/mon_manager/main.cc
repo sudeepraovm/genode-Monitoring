@@ -3,9 +3,9 @@
 #include <base/printf.h>
 #include <base/rpc_server.h>
 #include <base/sleep.h>
-#include <cap_session/connection.h>
+//#include <cap_session/connection.h>
 #include <root/component.h>
-
+#include <base/component.h>
 #include "mon_manager/mon_manager.h"
 
 /* local includes */
@@ -22,7 +22,7 @@ namespace Mon_manager
 			Mon_manager *_monmanager = nullptr;
 
 		public:
-
+			enum { CAP_QUOTA = 2 };
 			size_t update_info(Genode::Dataspace_capability ds_cap)
 			{
 				return _monmanager->update_info(ds_cap);
@@ -63,6 +63,8 @@ namespace Mon_manager
 			{
 				_monmanager = monmanager;
 			}
+			Session_component(const Session_component&);
+			Session_component& operator = (const Session_component&);
 
 	};
 
@@ -71,30 +73,34 @@ namespace Mon_manager
 
 		private:
 
+			//Genode::Env &_env;
 			Mon_manager *_monmanager = nullptr;
+			
 
 		protected:
 
-			Session_component *_create_session(const char *args)
+			Session_component *_create_session(const char *)
 			{
 				return new (md_alloc()) Session_component(_monmanager);
 			}
 
 		public:
 
-			Root_component(Genode::Rpc_entrypoint *ep,
-			               Genode::Allocator *allocator,
+			Root_component(Genode::Entrypoint &ep,
+			               Genode::Allocator &allocator,
 			               Mon_manager *monmanager)
 			: Genode::Root_component<Session_component>(ep, allocator)
 			{
 				_monmanager = monmanager;
 			}
+			Root_component(const Root_component&);
+			Root_component& operator = (const Root_component&);
 	};
 
 }
 
-using namespace Genode;
 
+/*
 int main()
 {
 	Mon_manager::Mon_manager monmanager;
@@ -114,3 +120,22 @@ int main()
 
 	return 0;
 }
+*/
+
+struct Main
+{	
+	Genode::Env &_env;
+	Genode::Entrypoint &_ep;	
+	Mon_manager::Mon_manager monmanager {_env};
+	Genode::Sliced_heap sliced_heap{_env.ram(),
+	                               _env.rm()};	
+	Mon_manager::Root_component _mon_manager_root{_ep, sliced_heap, &monmanager};
+	
+	Main(Genode::Env &env) : _env(env), _ep(_env.ep())
+	{
+				_env.parent().announce(_ep.manage(_mon_manager_root));
+	}	
+	
+};
+
+void Component::construct(Genode::Env &env) { static Main main(env); }
