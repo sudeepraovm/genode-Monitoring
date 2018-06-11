@@ -5,8 +5,9 @@
 #include <mon_manager/mon_manager_session.h>
 #include <utilization/connection.h>
 #include <utilization/utilization.h>
-#include <os/attached_ram_dataspace.h>
-#include <os/server.h>
+//#include <os/attached_ram_dataspace.h>
+#include <base/attached_ram_dataspace.h>
+//#include <os/server.h>
 #include <root/component.h>
 #include <timer_session/connection.h>
 #include <util/string.h>
@@ -23,9 +24,9 @@ struct Monitoring_object
 	Genode::Trace::Execution_time		execution_time;
 	unsigned	   			prio;
 	unsigned	   			id;
-	unsigned  	   			foc_id;
-	size_t		   			ram_quota;
-	size_t		   			ram_used;
+	int  	   			foc_id;
+	Genode::size_t		   			ram_quota;
+	Genode::size_t		   			ram_used;
 	Genode::Trace::CPU_info::State 		state;
 	Genode::Affinity::Location		affinity;
 	unsigned long long			start_time;
@@ -36,7 +37,8 @@ struct Monitoring_object
 class Mon_manager
 {
 	public:
-		size_t update_info(Genode::Dataspace_capability ds_cap);
+		Genode::Env &_env;
+		Genode::size_t update_info(Genode::Dataspace_capability ds_cap);
 		void update_rqs(Genode::Dataspace_capability rq_ds_cap);
 		void update_dead(Genode::Dataspace_capability dead_ds_cap);
 		Mon_manager();
@@ -47,25 +49,25 @@ class Mon_manager
 		int get_util(int core);
 		
 	protected:
-		Utilization::Connection util;
-		int num_subjects;
-		int* rq;
-		long long unsigned* dead;
-		Genode::Dataspace_capability rq_ds_cap;
-		bool core0_is_online;
-		bool core1_is_online;
-		bool core2_is_online;
-		bool core3_is_online;
-		int num_cores;
-		Genode::Trace::Execution_time idle0;
-		Genode::Trace::Execution_time idle1;
-		Genode::Trace::Execution_time idle2;
-		Genode::Trace::Execution_time idle3;
-		size_t ram_avail;
-		int num_threads;
-		double util0;
-		double util1;
-		double util2;
-		double util3;
+		Utilization::Connection util {};
+		int num_subjects {};
+		int* rq {};
+		long long unsigned* dead{};
+		Genode::Dataspace_capability rq_ds_cap{};
+		bool core0_is_online{};
+		bool core1_is_online{};
+		bool core2_is_online{};
+		bool core3_is_online{};
+		int num_cores{};
+		Genode::Trace::Execution_time idle0{};
+		Genode::Trace::Execution_time idle1{};
+		Genode::Trace::Execution_time idle2{};
+		Genode::Trace::Execution_time idle3{};
+		Genode::size_t ram_avail{};
+		int num_threads{};
+		double util0{};
+		double util1{};
+		double util2{};
+		double util3{};
 };
 }
