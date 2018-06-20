@@ -24,7 +24,7 @@ namespace Mon_manager
 
 		public:
 			enum { CAP_QUOTA = 2 };
-			size_t update_info(Genode::Dataspace_capability ds_cap)
+			Genode::size_t update_info(Genode::Dataspace_capability ds_cap)
 			{
 				return _monmanager->update_info(ds_cap);
 			}

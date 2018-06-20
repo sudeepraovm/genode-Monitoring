@@ -7,7 +7,7 @@
 #include <utilization/utilization.h>
 //#include <os/attached_ram_dataspace.h>
 #include <base/attached_ram_dataspace.h>
-#include <os/server.h>
+//#include <os/server.h>
 #include <root/component.h>
 #include <timer_session/connection.h>
 #include <util/string.h>
@@ -25,8 +25,8 @@ struct Monitoring_object
 	unsigned	   			prio;
 	unsigned	   			id;
 	int  	   			foc_id;
-	size_t		   			ram_quota;
-	size_t		   			ram_used;
+	Genode::size_t		   			ram_quota;
+	Genode::size_t		   			ram_used;
 	Genode::Trace::CPU_info::State 		state;
 	Genode::Affinity::Location		affinity;
 	unsigned long long			start_time;
@@ -38,7 +38,7 @@ class Mon_manager
 {
 	public:
 		Genode::Env &_env;
-		size_t update_info(Genode::Dataspace_capability ds_cap);
+		Genode::size_t update_info(Genode::Dataspace_capability ds_cap);
 		void update_rqs(Genode::Dataspace_capability rq_ds_cap);
 		void update_dead(Genode::Dataspace_capability dead_ds_cap);
 		Mon_manager(Genode::Env &_env);
@@ -65,7 +65,7 @@ class Mon_manager
 		Genode::Trace::Execution_time idle1{};
 		Genode::Trace::Execution_time idle2{};
 		Genode::Trace::Execution_time idle3{};
-		size_t ram_avail{};
+		Genode::size_t ram_avail{};
 		int num_threads{};
 		double util0{};
 		double util1{};
