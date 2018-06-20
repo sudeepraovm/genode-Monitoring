@@ -4,6 +4,7 @@
 #include <base/rpc_server.h>
 #include <base/sleep.h>
 //#include <cap_session/connection.h>
+#include <libc/component.h>
 #include <root/component.h>
 #include <base/component.h>
 #include "mon_manager/mon_manager.h"
@@ -124,18 +125,22 @@ int main()
 
 struct Main
 {	
-	Genode::Env &_env;
+	Libc::Env &_env;
 	Genode::Entrypoint &_ep;	
 	Mon_manager::Mon_manager monmanager {_env};
 	Genode::Sliced_heap sliced_heap{_env.ram(),
 	                               _env.rm()};	
 	Mon_manager::Root_component _mon_manager_root{_ep, sliced_heap, &monmanager};
 	
-	Main(Genode::Env &env) : _env(env), _ep(_env.ep())
+	Main(Libc::Env &env) : _env(env), _ep(_env.ep())
 	{
 				_env.parent().announce(_ep.manage(_mon_manager_root));
 	}	
 	
 };
 
-void Component::construct(Genode::Env &env) { static Main main(env); }
+//void Component::construct(Genode::Env &env) { static Main main(env); }
+void Libc::Component::construct(Libc::Env &env)
+{
+	Libc::with_libc([&] () { static Main main(env); });
+}
